@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --background: #f0f2f5;
         --red: #e52e4d;
+        --green: #33CC95;
         --blue: #5429cc;
         
         --blue-ligth: #6933ff;
@@ -11,8 +12,8 @@ export const GlobalStyle = createGlobalStyle`
         --text-title: #363f5f;
         --text-body: #969cb3;
 
-        --background: #f0f2f5;
-        --shape: #ffffff
+        --background: #F0F2F5;
+        --shape: #FFFFFF
 
     }
 
@@ -29,13 +30,13 @@ export const GlobalStyle = createGlobalStyle`
         }
 
         @media (max-width: 720px) {
-            font-size: 87.5; // 14px
+            font-size: 87.5%; // 14px
         } 
     }
 
     body {
-        background: var(---background);
-        --webkit-font-smoothing: antialiased;
+        background: var(--background);
+        -webkit-font-smoothing: antialiased;
 
     }
 
