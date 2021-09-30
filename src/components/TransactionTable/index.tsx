@@ -1,11 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { api } from '../../services/api'
 import { Conteiner } from "./styles";
 
+interface Transaction {
+    id: number;
+    title: string;
+    amount: number;
+    type: string;
+    category: string;
+    createdAt: string;
+
+}
+
 export function TransactionTable() {
+    const[transaction, setTransaction] = useState<Transaction[]>([])
+
+
     useEffect(()=> {
         api.get('transactions')
-        .then(response => console.log(response.data))
+        .then(response => setTransaction(response.data.transactions))
     }, []);
 
 
@@ -21,18 +34,25 @@ export function TransactionTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Desenvolvimento de website</td>
-                        <td className="deposit">R$12.000,00</td>
-                        <td>Desenvolvimento</td>
-                        <td>20/02/2021</td>
+                    {transaction.map(transaction => (
+                    <tr key={transaction.id}>
+                        <td>{transaction.title}</td>
+                        <td className={transaction.type}>
+                            {/* Formatação de moeda usando uma api nativa do javascript */}
+                            {new Intl.NumberFormat('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL'
+                            }).format(transaction.amount)}
+                        </td>
+                        <td>{transaction.category}</td>
+                        <td>
+                            
+                            {new Intl.DateTimeFormat('pt-BR').format(
+                                new Date(transaction.createdAt)
+                            )}
+                        </td>
                     </tr>
-                    <tr>
-                        <td>Aluguel</td>
-                        <td className="withdraw">- R$1.100,00</td>
-                        <td>Casa</td>
-                        <td>17/02/2021</td>
-                    </tr>
+                    ))}
                 </tbody>
             </table>
         </Conteiner>
