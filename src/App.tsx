@@ -8,7 +8,7 @@ import { NewTransactionModal } from "./components/NewTransactionModal";
 
 // o provider do contexto precisa estar aqui para ficar disponível em qualquer transação
 //poderíamos envolver o contexto apenas nas tags que precisam do acesso a essas dados
-import { TransactiosProvider } from "./TransactionsContext";
+import { TransactiosProvider } from "./hooks/useTransactions";
 
 Modal.setAppElement('#root')
 
