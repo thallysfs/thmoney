@@ -6,6 +6,10 @@ import Modal from 'react-modal'
 import { GlobalStyle } from "./styles/global";
 import { NewTransactionModal } from "./components/NewTransactionModal";
 
+// o provider do contexto precisa estar aqui para ficar disponível em qualquer transação
+//poderíamos envolver o contexto apenas nas tags que precisam do acesso a essas dados
+import { TransactiosProvider } from "./TransactionsContext";
+
 Modal.setAppElement('#root')
 
 export function App() {
@@ -21,13 +25,13 @@ export function App() {
 
 
   return (
-    <>
+    <TransactiosProvider>
       <Header  onOpenNewTransectionModal={handleOpenNewTransectionModal}/>
       <Dashboard />
       ,<NewTransactionModal isOpen={isNewTransectionModalOpen} onRequestClose={handleCloseNewTransectionModal} />
 
       <GlobalStyle />
-    </>
+    </TransactiosProvider>
   );
 }
 
